@@ -16,13 +16,19 @@
       integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="./public/css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/public/css/style.css" />
   </head>
   <body>
     <main class="contain">
       <section class="contain__section" id="incoming">
         <h1 class="title__add">Ingresos</h1>
-        <div class="add">
+        <form class="add">
           <input
             type="text"
             class="type__add form-control"
@@ -36,7 +42,7 @@
             placeholder="$"
           />
           <button class="btn btn-primary" id="btn__add">Add</button>
-        </div>
+        </form>
         <div class="container__add" id="container__add"></div>
         <div class="container__total" id="total">
           <p>Total:</p>
@@ -44,6 +50,7 @@
         </div>
       </section>
       <section class="contain__section" id="expend">
+        <h1 class="title__add">Gastos</h1>
         <div class="add">
           <input
             type="text"
@@ -52,26 +59,26 @@
             placeholder="type"
           />
           <input
-            type="text"
+            type="number"
             class="amount form-control"
             id="amountExpend"
             placeholder="$"
           />
           <button class="btn btn-primary" id="btn__expend">Add</button>
         </div>
-        <div class="container__add"></div>
-        <div class="container__total" id="total">
+        <div class="container__add" id="container__expend"></div>
+        <div class="container__total" id="e__total">
           <p>Total:</p>
-          <div class="total"></div>
+          <div class="total" id="expend__total"></div>
         </div>
       </section>
     </main>
     <div class="total__calc">
       <div class="container__total" id="total__calc">
-        <p>Total:</p>
-        <div class="total"></div>
+        <p>Saldo:</p>
+        <div class="total" id="total__dif"></div>
       </div>
     </div>
-    <script src="./public/index.js"></script>
+    <script src="/public/index.js"></script>
   </body>
 </html>

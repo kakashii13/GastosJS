@@ -8,6 +8,7 @@ let totalDif = document.getElementById("total__dif");
 let sumAdd = 0;
 let sumExpend = 0;
 let sumDif = 0;
+let arrLocal = [];
 
 class AddBox {
   constructor(type, amount) {
@@ -45,6 +46,16 @@ class AddBox {
         // sumDif
 
         totalDif.innerHTML = `$ ${sumAdd.toFixed(2) - sumExpend.toFixed(2)}`;
+
+        // add to local storage
+
+        let obj = {
+          type: this.type.value,
+          amount: this.amount.value,
+        };
+        arrLocal.push(obj);
+
+        localStorage.setItem("obj", JSON.stringify(arrLocal));
       }
     });
   }
@@ -88,3 +99,53 @@ add.addIncoming();
 let expend = new AddBox(typeExpend, amountExpend);
 
 expend.addExpend();
+
+let arr;
+
+document.addEventListener("DOMContentLoaded", () => {
+  function getLS() {
+    // get to local storage
+
+    arr = JSON.parse(localStorage.getItem("obj"));
+
+    console.log(arr);
+  }
+
+  getLS();
+
+  function showLS() {
+    arr.forEach((obj) => {
+      let type = obj.type;
+      let amount = obj.amount;
+
+      // crear lista
+
+      let containerAdd = document.getElementById("container__add");
+      let box = document.createElement("div");
+      box.className = "add__box";
+
+      let typeBox = document.createElement("div");
+      let amountBox = document.createElement("div");
+      typeBox.className = "box";
+      amountBox.className = "box";
+      typeBox.innerHTML = type;
+      amountBox.innerHTML = `$ ${amount}`;
+
+      box.appendChild(typeBox);
+      box.appendChild(amountBox);
+      containerAdd.appendChild(box);
+
+      let total = document.getElementById("add__total");
+
+      sumAdd += +amount;
+
+      total.innerHTML = `$ ${sumAdd.toFixed(2)}`;
+
+      // sumDif
+
+      totalDif.innerHTML = `$ ${sumAdd.toFixed(2) - sumExpend.toFixed(2)}`;
+    });
+  }
+
+  showLS();
+});
